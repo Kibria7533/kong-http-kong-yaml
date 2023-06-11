@@ -1,0 +1,24 @@
+_format_version: "3.0"
+
+services:
+   - name: demo-svc
+     host: demo-svc
+     path: /
+     protocol: http
+     routes:
+       - name: demo-svc-route
+         protocols:
+           - http
+           - https
+         paths:
+           - /demo
+
+plugins:
+ - name: http-log
+   config:
+     http_endpoint: http://log-svc
+     method: POST
+     timeout: 1000
+     keepalive: 1000
+     flush_timeout: 2
+     retry_count: 15
